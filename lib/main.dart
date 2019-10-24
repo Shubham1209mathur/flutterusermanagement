@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
+import 'Module/LoginResponse.dart';
+import 'callApi.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -43,7 +46,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     final emailField = TextField(
-      obscureText: true,
       style: style,
       controller: email,
       decoration: InputDecoration(
@@ -52,7 +54,6 @@ class _MyHomePageState extends State<MyHomePage> {
           border:
           OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
-
     final passwordField = TextField(
       obscureText: true,
       style: style,
@@ -71,33 +72,29 @@ class _MyHomePageState extends State<MyHomePage> {
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          onPressed: () {
+          onPressed: () async {
           if(email.text.isEmpty){
             show_toast("Please enter email id");
           }else
           if(password.text.isEmpty){
             show_toast("Please enter password");
           }else{
-            return showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  content: Text(email.text+"\n"+password.text),
-                );
-              },
-            );
-          }
-/*
-            return showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  content: Text(email.text+"\n"+password.text),
-                );
-              },
-            );
-*/
+            final Stream<LoginResponse> stream = await callapi("login");
+            stream.listen((LoginResponse beer) =>
+                setState(() =>  String)
 
+
+              /*return showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  content: Text(email.text+"\n"+password.text),
+                );
+              },
+            );*/
+            );
+
+          }
           },
         child: Text("Login",
             textAlign: TextAlign.center,
