@@ -1,11 +1,11 @@
-class LoginResponse{
+class BaseResponse{
   final int id;
   final String name;
   final String tagline;
   final String description;
   final String image_url;
 
-  LoginResponse.fromJSON(Map<String, dynamic> jsonMap) :
+  BaseResponse.fromJSON(Map<String, dynamic> jsonMap) :
         id = jsonMap['id'],
         name = jsonMap['name'],
         tagline = jsonMap['tagline'],

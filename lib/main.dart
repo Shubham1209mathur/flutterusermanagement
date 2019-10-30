@@ -1,6 +1,8 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
-import 'Module/LoginResponse.dart';
+import 'Module/BaseResponse.dart';
 import 'callApi.dart';
 
 void main() => runApp(MyApp());
@@ -79,20 +81,16 @@ class _MyHomePageState extends State<MyHomePage> {
           if(password.text.isEmpty){
             show_toast("Please enter password");
           }else{
-            final Stream<LoginResponse> stream = await callapi("login");
-            stream.listen((LoginResponse beer) =>
-                setState(() =>  String)
-
-
-              /*return showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  content: Text(email.text+"\n"+password.text),
-                );
-              },
-            );*/
-            );
+            var queryParameters = {
+              "email"":"+ email.text,
+              "password"":"+ password.text,
+              "device_type"":""ANDROID",
+              "device_id"":""12345678",
+              "address"":"" Ninehertzindia",
+              "lat"":"" 24.5223",
+              "lng"":"" 75.5666",
+            };
+            callPostApi("login",queryParameters.toString());
 
           }
           },
